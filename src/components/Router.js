@@ -4,26 +4,30 @@ import Home from "../routes/Home";
 import Auth from "../routes/Auth";
 import Profile from "../routes/Profile";
 import EditProfile from "../routes/EditProfile";
+import Navigation from "./Navigation";
+import { Redirect } from "react-router-dom";
 
 const AppRouter = ({ isLoggedIn }) => {
   return (
     <Router>
+      {isLoggedIn && <Navigation />}
       <Switch>
         {isLoggedIn ? (
           <>
-            <Route>
-              <Home exact path="/" />
+            <Route exact path="/">
+              <Home />
             </Route>
-            <Route>
-              <Profile exact path="/profile" />
+            <Route exact path="/profile">
+              <Profile />
             </Route>
-            <Route>
-              <EditProfile exact path="/editprofile" />
+            <Route exact path="/editprofile">
+              <EditProfile />
             </Route>
+            {/* <Redirect from="*" to="/" /> */}
           </>
         ) : (
-          <Route>
-            <Auth exact path="/" />
+          <Route exact path="/">
+            <Auth />
           </Route>
         )}
       </Switch>
